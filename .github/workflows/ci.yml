@@ -1,1 +1,35 @@
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull requests to main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Checks out the code
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'  # Set Node.js version
+
+    - name: Install dependencies
+      run: npm install  # Installs dependencies
+
+    - name: Run tests
+      run: npm test  # Run Jest tests
+
+    - name: Build and start app (optional)
+      run: |
+        npm start &
+        sleep 5  # Wait for app to start
+        curl http://localhost:3000  # Make a request to the app
 
