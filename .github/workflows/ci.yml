@@ -26,7 +26,7 @@ jobs:
 
     - name: Build and start app (optional)
       run: |
-        npm start &
+        node  index.js &
         sleep 5  # Wait for app to start
         curl http://localhost:3000  # Make a request to the app
 
